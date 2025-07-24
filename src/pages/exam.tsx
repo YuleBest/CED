@@ -103,7 +103,7 @@ const ExamPage: React.FC<ExamPageProps> = ({ onBack }) => {
           <div className="flex items-center justify-center h-64">
             <div className="text-center">
               <h2 className="text-xl font-semibold mb-2">暂无考试数据</h2>
-              <p className="text-gray-600 mb-4">请检查数据文件是否存在</p>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">请检查数据文件是否存在</p>
               <Button onClick={onBack} variant="outline">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 返回首页
@@ -129,15 +129,10 @@ const ExamPage: React.FC<ExamPageProps> = ({ onBack }) => {
   return (
     <div className="min-h-screen p-6">
       <div className="max-w-7xl mx-auto space-y-6">
-        {/* 返回按钮和页面标题 */}
+        {/* 页面标题 */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            {onBack && (
-              <Button variant="outline" onClick={onBack} className="flex items-center gap-2">
-                <ArrowLeft className="h-4 w-4" />
-                返回首页
-              </Button>
-            )}
+            <div></div>
             {allExams.length > 1 && (
               <div className="w-64">
                 <Select value={selectedExamId} onValueChange={handleExamChange}>
@@ -156,11 +151,11 @@ const ExamPage: React.FC<ExamPageProps> = ({ onBack }) => {
             )}
           </div>
           <div className="text-center space-y-2">
-            <h1 className="text-4xl font-bold text-gray-900 flex items-center justify-center gap-2">
-              <GraduationCap className="h-10 w-10 text-gray-700" />
+            <h1 className="text-4xl font-bold text-foreground flex items-center justify-center gap-2">
+              <GraduationCap className="h-10 w-10 text-muted-foreground" />
               {examData.info.name}
             </h1>
-            <p className="text-lg text-gray-600 flex items-center justify-center gap-2">
+            <p className="text-lg text-muted-foreground flex items-center justify-center gap-2">
               <MapPin className="h-5 w-5" />
               {examData.info.province} · {examData.info.city}
             </p>
@@ -169,53 +164,53 @@ const ExamPage: React.FC<ExamPageProps> = ({ onBack }) => {
 
         {/* 考试基本信息 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="border-gray-200 shadow-sm">
+          <Card className="border-border shadow-sm">
             <CardHeader className="flex flex-row items-center space-y-0 pb-2">
-              <Calendar className="h-5 w-5 text-gray-600" />
-              <CardTitle className="ml-2 text-lg text-gray-800">考试时间</CardTitle>
+              <Calendar className="h-5 w-5 text-muted-foreground" />
+              <CardTitle className="ml-2 text-lg text-foreground">考试时间</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{formatDate(examData.info.date.start)}</div>
-              <p className="text-sm text-gray-600">至 {formatDate(examData.info.date.end)}</p>
-              <p className="text-sm text-gray-600">共 {examData.info.date.duration_days} 天</p>
+              <div className="text-2xl font-bold text-foreground">{formatDate(examData.info.date.start)}</div>
+              <p className="text-sm text-muted-foreground">至 {formatDate(examData.info.date.end)}</p>
+              <p className="text-sm text-muted-foreground">共 {examData.info.date.duration_days} 天</p>
             </CardContent>
           </Card>
 
-          <Card className="border-gray-200 shadow-sm">
+          <Card className="border-border shadow-sm">
             <CardHeader className="flex flex-row items-center space-y-0 pb-2">
-              <Trophy className="h-5 w-5 text-gray-600" />
-              <CardTitle className="ml-2 text-lg text-gray-800">总分</CardTitle>
+              <Trophy className="h-5 w-5 text-muted-foreground" />
+              <CardTitle className="ml-2 text-lg text-foreground">总分</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-800">{examData.info.score.total}</div>
-              <p className="text-sm text-gray-500">满分</p>
+              <div className="text-2xl font-bold text-foreground">{examData.info.score.total}</div>
+              <p className="text-sm text-muted-foreground">满分</p>
             </CardContent>
           </Card>
 
-          <Card className="border-gray-200 shadow-sm">
+          <Card className="border-border shadow-sm">
             <CardHeader className="flex flex-row items-center space-y-0 pb-2">
-              <Users className="h-5 w-5 text-gray-600" />
-              <CardTitle className="ml-2 text-lg text-gray-800">考试特点</CardTitle>
+              <Users className="h-5 w-5 text-muted-foreground" />
+              <CardTitle className="ml-2 text-lg text-foreground">考试特点</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border">
+                <div className="flex items-center justify-between p-3 bg-muted rounded-lg border">
                   <div className="flex items-center gap-2">
-                    <div className={`w-2 h-2 rounded-full ${examData.info.scoreConversion ? 'bg-green-500' : 'bg-gray-400'}`}></div>
+                    <div className={`w-2 h-2 rounded-full ${examData.info.scoreConversion ? 'bg-green-500 dark:bg-green-400' : 'bg-gray-400 dark:bg-gray-600'}`}></div>
                     <span className="font-medium text-sm">卷面分折算</span>
                   </div>
                   <Badge variant={examData.info.scoreConversion ? "default" : "secondary"} 
-                         className={examData.info.scoreConversion ? "bg-green-100 text-green-800 border-green-200" : "bg-gray-100 text-gray-600 border-gray-300"}>
+                         className={examData.info.scoreConversion ? "bg-green-100 text-green-800 border-green-200 dark:bg-green-900 dark:text-green-200 dark:border-green-800" : "bg-muted text-muted-foreground border-border"}>
                     {examData.info.scoreConversion ? "有" : "无"}
                   </Badge>
                 </div>
-                <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border">
+                <div className="flex items-center justify-between p-3 bg-muted rounded-lg border">
                   <div className="flex items-center gap-2">
-                    <div className={`w-2 h-2 rounded-full ${examData.info.localEnrollment ? 'bg-blue-500' : 'bg-gray-400'}`}></div>
+                    <div className={`w-2 h-2 rounded-full ${examData.info.localEnrollment ? 'bg-blue-500 dark:bg-blue-400' : 'bg-muted-foreground'}`}></div>
                     <span className="font-medium text-sm">属地招生</span>
                   </div>
                   <Badge variant={examData.info.localEnrollment ? "default" : "secondary"} 
-                         className={examData.info.localEnrollment ? "bg-blue-100 text-blue-800 border-blue-200" : "bg-gray-100 text-gray-600 border-gray-300"}>
+                         className={examData.info.localEnrollment ? "bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:border-blue-800" : "bg-muted text-muted-foreground border-border"}>
                     {examData.info.localEnrollment ? "有" : "无"}
                   </Badge>
                 </div>
@@ -226,19 +221,19 @@ const ExamPage: React.FC<ExamPageProps> = ({ onBack }) => {
 
         {/* 详细信息标签页 */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-4 bg-gray-100 border-gray-200">
-            <TabsTrigger value="schedule" className="data-[state=active]:bg-white data-[state=active]:text-gray-900 text-gray-600">考试安排</TabsTrigger>
-            <TabsTrigger value="scores" className="data-[state=active]:bg-white data-[state=active]:text-gray-900 text-gray-600">分数设置</TabsTrigger>
-            <TabsTrigger value="cutoff" className="data-[state=active]:bg-white data-[state=active]:text-gray-900 text-gray-600">录取分数线</TabsTrigger>
-            <TabsTrigger value="special" className="data-[state=active]:bg-white data-[state=active]:text-gray-900 text-gray-600">特殊政策</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-4 bg-muted border-border">
+            <TabsTrigger value="schedule" className="data-[state=active]:bg-white data-[state=active]:text-gray-900 text-gray-600 dark:data-[state=active]:bg-gray-800 dark:data-[state=active]:text-gray-100 dark:text-gray-400">考试安排</TabsTrigger>
+            <TabsTrigger value="scores" className="data-[state=active]:bg-white data-[state=active]:text-gray-900 text-gray-600 dark:data-[state=active]:bg-gray-800 dark:data-[state=active]:text-gray-100 dark:text-gray-400">分数设置</TabsTrigger>
+            <TabsTrigger value="cutoff" className="data-[state=active]:bg-white data-[state=active]:text-gray-900 text-gray-600 dark:data-[state=active]:bg-gray-800 dark:data-[state=active]:text-gray-100 dark:text-gray-400">录取分数线</TabsTrigger>
+            <TabsTrigger value="special" className="data-[state=active]:bg-background data-[state=active]:text-foreground text-muted-foreground">特殊政策</TabsTrigger>
           </TabsList>
 
           {/* 考试安排 */}
           <TabsContent value="schedule">
-            <Card className="border-gray-200 shadow-sm">
+            <Card className="border-border shadow-sm">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-gray-800">
-                  <Clock className="h-5 w-5 text-gray-600" />
+                <CardTitle className="flex items-center gap-2 text-foreground">
+                  <Clock className="h-5 w-5 text-muted-foreground" />
                   考试时间安排
                 </CardTitle>
                 <CardDescription>
@@ -264,7 +259,7 @@ const ExamPage: React.FC<ExamPageProps> = ({ onBack }) => {
                         <TableCell>{formatTime(time.start)}</TableCell>
                         <TableCell>{formatTime(time.end)}</TableCell>
                         <TableCell>
-                          <Badge variant="outline" className="bg-gray-50 text-gray-700 border-gray-300">{time.duration}分钟</Badge>
+                          <Badge variant="outline" className="bg-muted text-muted-foreground border-border">{time.duration}分钟</Badge>
                         </TableCell>
                       </TableRow>
                     ))}
@@ -278,22 +273,22 @@ const ExamPage: React.FC<ExamPageProps> = ({ onBack }) => {
           <TabsContent value="scores">
             <div className="space-y-6">
               {/* 总分概览 */}
-              <Card className="border-gray-200 shadow-sm">
+              <Card className="border-border shadow-sm">
                 <CardHeader className="text-center">
-                  <CardTitle className="text-2xl text-gray-800 flex items-center justify-center gap-2">
-                    <Trophy className="h-6 w-6 text-yellow-600" />
+                  <CardTitle className="text-2xl text-foreground flex items-center justify-center gap-2">
+                    <Trophy className="h-6 w-6 text-yellow-600 dark:text-yellow-400" />
                     考试总分
                   </CardTitle>
-                  <div className="text-4xl font-bold text-gray-900 mt-2">{examData.info.score.total}分</div>
-                  <CardDescription className="text-gray-600">各科目分数详细设置</CardDescription>
+                  <div className="text-4xl font-bold text-foreground mt-2">{examData.info.score.total}分</div>
+                  <CardDescription className="text-muted-foreground">各科目分数详细设置</CardDescription>
                 </CardHeader>
               </Card>
 
               {/* 分数详情表格 */}
-              <Card className="border-gray-200 shadow-sm">
+              <Card className="border-border shadow-sm">
                 <CardHeader>
-                  <CardTitle className="text-gray-800">各科目分数设置</CardTitle>
-                  <CardDescription className="text-gray-600">包含卷面分、计入分数和折算说明</CardDescription>
+                  <CardTitle className="text-foreground">各科目分数设置</CardTitle>
+                  <CardDescription className="text-muted-foreground">包含卷面分、计入分数和折算说明</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Table>
@@ -315,30 +310,30 @@ const ExamPage: React.FC<ExamPageProps> = ({ onBack }) => {
                             <TableCell className="font-medium w-1/4">{subject}</TableCell>
                             <TableCell className="w-1/4">
                               {paperScore ? (
-                                <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+                                <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950 dark:text-blue-200 dark:border-blue-800">
                                   {paperScore}分
                                 </Badge>
                               ) : (
-                                <Badge variant="outline" className="bg-gray-50 text-gray-700 border-gray-300">
+                                <Badge variant="outline" className="bg-muted text-muted-foreground border-border">
                                   {score}分
                                 </Badge>
                               )}
                             </TableCell>
                             <TableCell className="w-1/4">
-                              <Badge className={hasConversion ? "bg-green-600 text-white" : "bg-gray-600 text-white"}>
+                              <Badge className={hasConversion ? "bg-green-600 text-white dark:bg-green-700" : "bg-muted-foreground text-white"}>
                                 {score}分
                               </Badge>
                             </TableCell>
                             <TableCell className="w-1/4">
                               {hasConversion ? (
                                 <div className="flex items-center gap-2">
-                                  <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-                                  <span className="text-sm text-orange-700">需要折算</span>
+                                  <div className="w-2 h-2 bg-orange-500 dark:bg-orange-400 rounded-full"></div>
+                                  <span className="text-sm text-orange-700 dark:text-orange-300">需要折算</span>
                                 </div>
                               ) : (
                                 <div className="flex items-center gap-2">
-                                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                                  <span className="text-sm text-green-700">直接计入</span>
+                                  <div className="w-2 h-2 bg-green-500 dark:bg-green-400 rounded-full"></div>
+                                  <span className="text-sm text-green-700 dark:text-green-300">直接计入</span>
                                 </div>
                               )}
                             </TableCell>
@@ -349,23 +344,23 @@ const ExamPage: React.FC<ExamPageProps> = ({ onBack }) => {
                   </Table>
                   
                   {/* 分数统计 */}
-                  <div className="mt-6 p-4 bg-gray-50 rounded-lg border">
+                  <div className="mt-6 p-4 bg-muted rounded-lg border">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
                       <div>
-                        <div className="text-2xl font-bold text-gray-900">{Object.keys(examData.info.score.subjects).length}</div>
-                        <div className="text-sm text-gray-600">考试科目</div>
+                        <div className="text-2xl font-bold text-foreground">{Object.keys(examData.info.score.subjects).length}</div>
+                        <div className="text-sm text-muted-foreground">考试科目</div>
                       </div>
                       <div>
                         <div className="text-2xl font-bold text-orange-600">
                           {examData.info.score.paper ? Object.keys(examData.info.score.paper).length : 0}
                         </div>
-                        <div className="text-sm text-gray-600">需要折算</div>
+                        <div className="text-sm text-muted-foreground">需要折算</div>
                       </div>
                       <div>
-                        <div className="text-2xl font-bold text-green-600">
+                        <div className="text-2xl font-bold text-green-600 dark:text-green-400">
                           {Object.keys(examData.info.score.subjects).length - (examData.info.score.paper ? Object.keys(examData.info.score.paper).length : 0)}
                         </div>
-                        <div className="text-sm text-gray-600">直接计入</div>
+                        <div className="text-sm text-muted-foreground">直接计入</div>
                       </div>
                     </div>
                   </div>
@@ -419,28 +414,28 @@ const ExamPage: React.FC<ExamPageProps> = ({ onBack }) => {
                 
                 
                 return (
-                  <Card key={district} className="border-gray-200 shadow-sm">
+                  <Card key={district} className="border-border shadow-sm">
                     <CardHeader>
-                      <CardTitle className="text-gray-800">{district}录取分数线</CardTitle>
-                    </CardHeader>
+                  <CardTitle className="text-foreground">{district}录取分数线</CardTitle>
+                </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
                         {schoolsWithPercentage.map(({ school, score, percentage, hasSbd, isAverage }) => {
                           return (
                             <div key={school} className="space-y-2">
                               <div className="flex justify-between items-center">
-                                <span className="font-medium text-gray-800">{school}</span>
+                                <span className="font-medium text-foreground">{school}</span>
                                 <div className="flex items-center gap-2">
-                                  <span className="text-lg font-bold text-gray-900">{score}分</span>
+                                  <span className="text-lg font-bold text-foreground">{score}分</span>
                                   {isAverage && (
                                     <Badge variant="outline" className="bg-orange-50 text-orange-700 border-orange-200 text-xs">
                                       平均
                                     </Badge>
                                   )}
-                                  <span className="text-sm text-gray-600">({percentage}%)</span>
+                                  <span className="text-sm text-muted-foreground">({percentage}%)</span>
                                 </div>
                               </div>
-                              <div className="w-full bg-gray-200 rounded-full h-3">
+                              <div className="w-full bg-muted rounded-full h-3">
                                 <div 
                                   className="bg-gradient-to-r from-blue-200 to-blue-300 h-3 rounded-full transition-all duration-300"
                                   style={{ width: `${percentage}%` }}
@@ -451,7 +446,7 @@ const ExamPage: React.FC<ExamPageProps> = ({ onBack }) => {
                                   <Button 
                                     variant="outline" 
                                     size="sm" 
-                                    className="text-xs h-7 px-2 bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100"
+                                    className="text-xs h-7 px-2 bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100 dark:bg-blue-950 dark:text-blue-200 dark:border-blue-800 dark:hover:bg-blue-900"
                                     onClick={() => {
                                       // 切换到特殊政策标签页
                                       setActiveTab('special');
@@ -476,10 +471,10 @@ const ExamPage: React.FC<ExamPageProps> = ({ onBack }) => {
           <TabsContent value="special">
             <div className="space-y-6">
               {/* 分地区计线 */}
-              <Card className="border-gray-200 shadow-sm">
+              <Card className="border-border shadow-sm">
                 <CardHeader>
-                  <CardTitle className="text-gray-800">分地区计线政策</CardTitle>
-                  <CardDescription className="text-gray-600">部分学校按不同地区设置不同录取分数线</CardDescription>
+                  <CardTitle className="text-foreground">分地区计线政策</CardTitle>
+                  <CardDescription className="text-muted-foreground">部分学校按不同地区设置不同录取分数线</CardDescription>
                 </CardHeader>
                 <CardContent>
                   {(() => {
@@ -499,7 +494,7 @@ const ExamPage: React.FC<ExamPageProps> = ({ onBack }) => {
                     
                     if (sbdData.length === 0) {
                       return (
-                        <div className="text-center text-gray-500 py-8">
+                        <div className="text-center text-muted-foreground py-8">
                           <p>当前数据中暂无分地区计线信息</p>
                         </div>
                       );
@@ -509,15 +504,15 @@ const ExamPage: React.FC<ExamPageProps> = ({ onBack }) => {
                       <div className="space-y-6">
                         {sbdData.map(({ district, school, scores }) => (
                           <div key={`${district}-${school}`}>
-                            <h4 className="font-semibold mb-3 text-gray-800">{school} - {district}地区分地区计线</h4>
-                            <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                            <h4 className="font-semibold mb-3 text-foreground">{school} - {district}地区分地区计线</h4>
+                            <div className="bg-muted p-4 rounded-lg border border-border">
                               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                 {Object.entries(scores).map(([area, score]) => {
                                   const areaName = area.split('|')[0];
                                   return (
-                                    <div key={area} className="flex justify-between items-center p-3 bg-white rounded border">
-                                      <span className="font-medium text-gray-700">{areaName}</span>
-                                      <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+                                    <div key={area} className="flex justify-between items-center p-3 bg-background rounded border">
+                                      <span className="font-medium text-foreground">{areaName}</span>
+                                      <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950 dark:text-blue-200 dark:border-blue-800">
                                         {score}分
                                       </Badge>
                                     </div>
@@ -534,10 +529,10 @@ const ExamPage: React.FC<ExamPageProps> = ({ onBack }) => {
               </Card>
 
               {/* 指标到校 */}
-              <Card className="border-gray-200 shadow-sm">
+              <Card className="border-border shadow-sm">
                 <CardHeader>
-                  <CardTitle className="text-gray-800">指标到校政策</CardTitle>
-                  <CardDescription className="text-gray-600">部分学校实行指标到校招生政策</CardDescription>
+                  <CardTitle className="text-foreground">指标到校政策</CardTitle>
+                  <CardDescription className="text-muted-foreground">部分学校实行指标到校招生政策</CardDescription>
                 </CardHeader>
                 <CardContent>
                   {(() => {
@@ -557,7 +552,7 @@ const ExamPage: React.FC<ExamPageProps> = ({ onBack }) => {
                     
                     if (qbsData.length === 0) {
                       return (
-                        <div className="text-center text-gray-500 py-8">
+                        <div className="text-center text-muted-foreground py-8">
                           <p>当前数据中暂无指标到校信息</p>
                         </div>
                       );
@@ -567,17 +562,17 @@ const ExamPage: React.FC<ExamPageProps> = ({ onBack }) => {
                       <div className="space-y-6">
                         {qbsData.map(({ district, data }) => (
                           <div key={district}>
-                            <h4 className="font-semibold mb-3 text-gray-800">{district}指标到校政策</h4>
-                            <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 space-y-4">
+                            <h4 className="font-semibold mb-3 text-foreground">{district}</h4>
+                            <div className="bg-muted p-4 rounded-lg border border-border space-y-4">
                               {/* 指标到校分数线 */}
                               {data.qbs && Object.keys(data.qbs).length > 0 && (
                                 <div>
-                                  <h5 className="font-medium text-gray-700 mb-2">指标到校分数线</h5>
+                                  <h5 className="font-medium text-foreground mb-2">指标到校分数线</h5>
                                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                     {Object.entries(data.qbs).map(([school, score]) => (
-                                      <div key={school} className="flex justify-between items-center p-3 bg-white rounded border">
-                                        <span className="font-medium text-gray-700">{school}</span>
-                                        <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+                                      <div key={school} className="flex justify-between items-center p-3 bg-background rounded border">
+                                        <span className="font-medium text-foreground">{school}</span>
+                                        <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200 dark:bg-green-950 dark:text-green-200 dark:border-green-800">
                                           {score}分
                                         </Badge>
                                       </div>
@@ -588,10 +583,10 @@ const ExamPage: React.FC<ExamPageProps> = ({ onBack }) => {
                               {/* 指标到校说明 */}
                               {data.qbsNotes && data.qbsNotes.length > 0 && (
                                 <div>
-                                  <h5 className="font-medium text-gray-700 mb-2">政策说明</h5>
+                                  <h5 className="font-medium text-foreground mb-2">政策说明</h5>
                                   <div className="space-y-2">
                                     {data.qbsNotes.map((note, index) => (
-                                      <p key={index} className="text-gray-600 text-sm leading-relaxed">
+                                      <p key={index} className="text-muted-foreground text-sm leading-relaxed">
                                         {note}
                                       </p>
                                     ))}
