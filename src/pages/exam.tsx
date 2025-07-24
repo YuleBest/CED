@@ -387,7 +387,7 @@ const ExamPage: React.FC<ExamPageProps> = ({ onBack }) => {
                 // 计算每个学校的百分比并排序
                 const schoolsWithPercentage = Array.from(allSchools)
                   .map((school) => {
-                    // 检查是否有分区县计线数据
+                    // 检查是否有分地区计线数据
                     const hasSbd = data.sbd && data.sbd[school] && Object.keys(data.sbd[school]).length > 0;
                     const schoolScore = data.schools[school];
                     let displayScore = schoolScore;
@@ -457,7 +457,7 @@ const ExamPage: React.FC<ExamPageProps> = ({ onBack }) => {
                                       setActiveTab('special');
                                     }}
                                   >
-                                    查看分区县计线详情
+                                    查看分地区计线详情
                                   </Button>
                                 </div>
                               )}
@@ -475,10 +475,10 @@ const ExamPage: React.FC<ExamPageProps> = ({ onBack }) => {
           {/* 特殊政策 */}
           <TabsContent value="special">
             <div className="space-y-6">
-              {/* 分区县计线 */}
+              {/* 分地区计线 */}
               <Card className="border-gray-200 shadow-sm">
                 <CardHeader>
-                  <CardTitle className="text-gray-800">分区县计线政策</CardTitle>
+                  <CardTitle className="text-gray-800">分地区计线政策</CardTitle>
                   <CardDescription className="text-gray-600">部分学校按不同地区设置不同录取分数线</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -500,7 +500,7 @@ const ExamPage: React.FC<ExamPageProps> = ({ onBack }) => {
                     if (sbdData.length === 0) {
                       return (
                         <div className="text-center text-gray-500 py-8">
-                          <p>当前数据中暂无分区县计线信息</p>
+                          <p>当前数据中暂无分地区计线信息</p>
                         </div>
                       );
                     }
@@ -509,7 +509,7 @@ const ExamPage: React.FC<ExamPageProps> = ({ onBack }) => {
                       <div className="space-y-6">
                         {sbdData.map(({ district, school, scores }) => (
                           <div key={`${district}-${school}`}>
-                            <h4 className="font-semibold mb-3 text-gray-800">{school} - {district}地区分区县计线</h4>
+                            <h4 className="font-semibold mb-3 text-gray-800">{school} - {district}地区分地区计线</h4>
                             <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
                               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                 {Object.entries(scores).map(([area, score]) => {
