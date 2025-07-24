@@ -3,13 +3,20 @@ import ExamPage from './pages/exam'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { GraduationCap, FileText, Info } from 'lucide-react'
+import { StagewiseToolbar } from '@stagewise/toolbar-react'
+import ReactPlugin from '@stagewise-plugins/react'
 import './App.css'
 
 function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'exam'>('home')
 
   if (currentPage === 'exam') {
-    return <ExamPage onBack={() => setCurrentPage('home')} />
+    return (
+      <>
+        <ExamPage onBack={() => setCurrentPage('home')} />
+        <StagewiseToolbar config={{ plugins: [ReactPlugin] }} />
+      </>
+    )
   }
 
   return (
@@ -97,6 +104,7 @@ function App() {
           </Button>
         </div>
       </div>
+      <StagewiseToolbar config={{ plugins: [ReactPlugin] }} />
     </div>
   )
 }
