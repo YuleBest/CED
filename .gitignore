@@ -13,6 +13,7 @@ dist-ssr
 *.local
 __test__
 src/data
+.vercel
 
 # Editor directories and files
 .vscode/*
